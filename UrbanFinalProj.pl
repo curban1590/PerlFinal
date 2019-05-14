@@ -5,13 +5,12 @@ use strict;
 #use warnings;
 use Math::Round;
 use Text::CSV;
-#use Term::Menus;
-#my @list=('Top Sales by Platform','Top Sales by Year','Top Sales by Genre','Top Sales by Publisher','Top Sales For Given Year','Game with the Highest Sales','Game with the Lowest Sales','Platform with the Highest Sales',
-#'Platform with the Lowest Sales','Publisher with the Highest Sales','Publisher with the Lowest Sales',
-#'Year with the Highest Sales','Year with the Lowest Sales');
-#my $banner="  Please Pick an Item:";
-#my $selection=&pick(\@list,$banner);
-my $selection='Top Sales by Year';
+use Term::Menus;
+my @list=('Top Sales by Platform','Top Sales by Year','Top Sales by Genre','Top Sales by Publisher','Top Sales For Given Year','Game with the Highest Sales','Game with the Lowest Sales','Platform with the Highest Sales',
+'Platform with the Lowest Sales','Publisher with the Highest Sales','Publisher with the Lowest Sales',
+'Year with the Highest Sales','Year with the Lowest Sales');
+my $banner="  Please Pick an Item:";
+my $selection=&pick(\@list,$banner);
 print "SELECTION = $selection\n";
 
 my $csv = Text::CSV->new({ sep_char => ',' });
@@ -62,7 +61,7 @@ my @platforms;
 foreach my $next(@platform){
 		if ($i ne 0){
 			#if the platform isnt in the array of discrete platforms, add it with the sales total as the value after
-			if(!($next ~~ @platforms)){
+			if(!(grep{$next eq $_}@platforms)){
 				push(@platforms,$next);
 				push(@platforms,$global_sales[$i]);
 			}
@@ -85,7 +84,7 @@ my @publishers;
 foreach my $next(@publisher){
 		if ($i ne 0){
 			#if the publisher isnt in the array of discrete publishers, add it with the sales total as the value after
-			if(!($next ~~ @publishers)){
+			if(!(grep{$next eq $_}@publishers)){
 				push(@publishers,$next);
 				push(@publishers,$global_sales[$i]);
 			}
@@ -108,7 +107,7 @@ my @years;
 foreach my $next(@year){
 		if ($i ne 0){
 			#if the years isnt in the array of discrete years, add it with the sales total as the value after
-			if(!($next ~~ @years)){
+			if(!(grep{$next eq $_}@years)){
 				push(@years,$next);
 				push(@years,$global_sales[$i]);
 			}
@@ -131,7 +130,7 @@ my @genres;
 foreach my $next(@genre){
 		if ($i ne 0){
 			#if the genres isnt in the array of discrete genres, add it with the sales total as the value after
-			if(!($next ~~ @genres)){
+			if(!(grep{$next eq $_}@genres)){
 				push(@genres,$next);
 				push(@genres,$global_sales[$i]);
 			}
